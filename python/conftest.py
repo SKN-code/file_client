@@ -40,7 +40,7 @@ def file_name_random(uuid_random):
 def args():
     return Namespace(
         base_url="http://localhost:8080/",
-        resource_locator="1234",
+        uuid="1234",
         backend="rest",
         output="output.txt",
     )
@@ -50,7 +50,7 @@ def args():
 def args_del():
     return Namespace(
         base_url="http://localhost:8080/",
-        resource_locator="2345",
+        uuid="2345",
         backend="rest",
         output="output.txt",
     )
@@ -60,7 +60,7 @@ def args_del():
 def args_create():
     return Namespace(
         base_url="http://localhost:8080/",
-        resource_locator="python/storage_test/test.txt",
+        uuid="storage_test/test.txt",
         backend="rest",
         output="output.txt",
     )
@@ -68,10 +68,10 @@ def args_create():
 
 @pytest.fixture(autouse=True)
 def prepare_file(args):
-    with open(f"python/storage/{args.resource_locator}.txt", "w") as f:
+    with open(f"storage/{args.uuid}.txt", "w") as f:
         f.write("test")
     yield
-    os.remove(f"python/storage/{args.resource_locator}.txt")
+    os.remove(f"storage/{args.uuid}.txt")
 
 
 @pytest.fixture(autouse=True, scope="session")

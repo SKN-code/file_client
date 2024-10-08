@@ -29,7 +29,7 @@ def handle_write(func):
 @handle_grpc
 @handle_write
 def stat(args: Namespace):
-    response = requests.get(f"{args.base_url}file/{args.resource_locator}/stat")
+    response = requests.get(f"{args.base_url}file/{args.uuid}/stat")
     return """
     Creation datetime: {create_datetime}
     size: {size}
@@ -42,7 +42,7 @@ def stat(args: Namespace):
 
 @handle_grpc
 def read(args: Namespace):
-    content = requests.get(f"{args.base_url}file/{args.resource_locator}/read").content
+    content = requests.get(f"{args.base_url}file/{args.uuid}/read").content
 
     if args.output:
         with open(args.output, "wb") as f:
@@ -54,13 +54,13 @@ def read(args: Namespace):
 @handle_grpc
 @handle_write
 def delete(args: Namespace):
-    response = requests.delete(f"{args.base_url}file/{args.resource_locator}/delete")
+    response = requests.delete(f"{args.base_url}file/{args.uuid}/delete")
     return response.json()
 
 
 @handle_grpc
 @handle_write
 def create(args: Namespace):
-    with open(args.resource_locator, "rb") as f:
+    with open(args.uuid, "rb") as f:
         response = requests.post(f"{args.base_url}file/create", files={"file": f})
     return response.json()

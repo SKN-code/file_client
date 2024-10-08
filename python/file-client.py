@@ -61,7 +61,6 @@ if __name__ == "__main__":
         type=str,
         help="File path to upload. | UUID of the file to be processed.",
         metavar="filename | UUID",
-        target="resource_locator",
     )
 
     args = parser.parse_args()

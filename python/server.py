@@ -126,7 +126,7 @@ def create_app() -> FastAPI:
         )
 
     @app.delete("/file/{uuid}/delete")
-    async def file_delete(uuid: str) -> str:
+    def file_delete(uuid: str) -> str:
         if not check_if_file_exists(uuid):
             print(f"File {uuid} not found")
             raise HTTPException(status_code=404, detail="File not found")

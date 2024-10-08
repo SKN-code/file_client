@@ -18,7 +18,7 @@ def test_read(args):
 def test_stat(args):
     try:
         stat(args)
-        path = f"python/storage/{args.resource_locator}.txt"
+        path = f"storage/{args.uuid}.txt"
         file_name = path.split("/")[-1]
         file_type = get_type_mime(file_name)
         file_size = os.path.getsize(path)
@@ -38,12 +38,12 @@ def test_stat(args):
 
 def test_delete(args_del):
     try:
-        open(f"python/storage/{args_del.resource_locator}.txt", "a")
+        open(f"storage/{args_del.uuid}.txt", "a")
         delete(args_del)
         with open(args_del.output) as f:
             result = f.read()
-        assert result == args_del.resource_locator
-        assert f"{args_del.resource_locator}.txt" not in os.listdir("python/storage")
+        assert result == args_del.uuid
+        assert f"{args_del.uuid}.txt" not in os.listdir("storage")
     finally:
         os.remove(args_del.output)
 
@@ -53,10 +53,10 @@ def test_create(args_create):
         create(args_create)
         with open(args_create.output) as f:
             result = f.read()
-        assert f"{result}.txt" in os.listdir("python/storage")
+        assert f"{result}.txt" in os.listdir("storage")
 
-        with open(f"python/storage/{result}.txt") as f:
+        with open(f"storage/{result}.txt") as f:
             assert f.read() == "test"
     finally:
         os.remove(args_create.output)
-        os.remove(f"python/storage/{result}.txt")
+        os.remove(f"storage/{result}.txt")
