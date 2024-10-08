@@ -1,7 +1,9 @@
 import os
-from unittest.mock import mock_open, patch
 from datetime import datetime
+from unittest.mock import mock_open, patch
+
 import requests
+
 from file_utils import create, delete, read, stat
 from server import get_type_mime
 

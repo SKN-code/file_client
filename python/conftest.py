@@ -7,6 +7,7 @@ from argparse import Namespace
 import pytest
 import uvicorn
 from fastapi.testclient import TestClient
+
 from server import create_app
 
 
@@ -39,7 +40,7 @@ def file_name_random(uuid_random):
 @pytest.fixture
 def args():
     return Namespace(
-        base_url="http://localhost:8080/",
+        base_url="http://127.0.0.1:8080/",
         uuid="1234",
         backend="rest",
         output="output.txt",
@@ -49,7 +50,7 @@ def args():
 @pytest.fixture
 def args_del():
     return Namespace(
-        base_url="http://localhost:8080/",
+        base_url="http://127.0.0.1:8080/",
         uuid="2345",
         backend="rest",
         output="output.txt",
@@ -59,7 +60,7 @@ def args_del():
 @pytest.fixture
 def args_create():
     return Namespace(
-        base_url="http://localhost:8080/",
+        base_url="http://127.0.0.1:8080/",
         uuid="storage_test/test.txt",
         backend="rest",
         output="output.txt",
@@ -79,7 +80,7 @@ def serve_fastapi():
     app = create_app()
 
     def run_server():
-        uvicorn.run(app, host="localhost", port=8080, log_level="info")
+        uvicorn.run(app, host="127.0.0.1", port=8080, log_level="info")
 
     process = multiprocessing.Process(target=run_server)
     process.start()

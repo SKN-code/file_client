@@ -2,10 +2,11 @@ import glob
 import os
 from datetime import datetime
 from mimetypes import guess_extension, guess_type
-from typing import Tuple, TypedDict
+from typing import Tuple
 from uuid import uuid4
 
 from fastapi import FastAPI, HTTPException, Request, Response, UploadFile
+from typing_extensions import TypedDict
 
 
 class StatResponseDict(TypedDict):

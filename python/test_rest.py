@@ -2,8 +2,9 @@ import os
 from typing import Tuple
 
 import pytest
-import server
 from fastapi.testclient import TestClient
+
+import server
 
 
 def test_file_exists(file_name_random: Tuple[str, str]):

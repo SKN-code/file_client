@@ -1,0 +1,7 @@
+from python:3.10-bullseye
+
+workdir /app
+copy . /app
+
+expose 8080
+entrypoint ["make","test"]
